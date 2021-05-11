@@ -9,6 +9,8 @@ const User = ({user, loading, getUserRepos, getUser, repos, match}) => {
 
 
     useEffect(() => {
+        // grabs the param passed in app.js on the route path='/user/:login'
+        // and plugs it into the api endpoint in the getUser function
         getUser(match.params.login)
         getUserRepos(match.params.login)
         // use this to remove warning if you only want it to run once
