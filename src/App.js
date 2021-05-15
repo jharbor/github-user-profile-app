@@ -86,11 +86,6 @@ const App = () => {
 		setTimeout(()=> setAlert(null), 5000)
 
 	}
-
-
-	
-
-
 		// const {users, user, loading,repos } = this.state;
 
 		return (
@@ -102,6 +97,7 @@ const App = () => {
 					<Switch>
 						<Route exact path='/' render={props => (
 							<Fragment>
+							{document.title = 'Github User Search'}
 							<Search 
 							clearUsers={clearUsers} 
 							searchUsers={searchUsers} 

@@ -12,6 +12,8 @@ const User = ({user, loading, getUserRepos, getUser, repos, match}) => {
         // grabs the param passed in app.js on the route path='/user/:login'
         // and plugs it into the api endpoint in the getUser function
         getUser(match.params.login)
+        document.title = `${name} | Profile`
+
         getUserRepos(match.params.login)
         // use this to remove warning if you only want it to run once
         // eslint-disable-next-line
