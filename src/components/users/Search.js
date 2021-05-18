@@ -1,8 +1,10 @@
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 
+// passed in as props from app and destructuring
  const Search = ({searchUsers, showClear,clearUsers, setAlert}) => {
 
+	// destructuring to store initial state, then updating it
 	const [text, setText] = useState('');
 
 	const onChange = (e) => {

@@ -3,6 +3,7 @@ import UserItem from './UserItem'
 import Spinner from '../layout/Spinner'
 import PropTypes from 'prop-types'
 
+// passed in as props from app and destructuring
 const Users = ({users,loading}) => {
 
 
@@ -21,10 +22,7 @@ const Users = ({users,loading}) => {
 
 }
 
-Users.propTypes = {
-	users: PropTypes.array.isRequired,
-	loading: PropTypes.bool.isRequired,
-}
+
 
 const userStyle = {
 	display: 'grid',
