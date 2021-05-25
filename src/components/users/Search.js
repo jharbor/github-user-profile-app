@@ -1,15 +1,17 @@
 import React, {useState, useContext} from 'react'
-import PropTypes from 'prop-types'
 import GithubContext from '../../context/github/githubContext'
+import AlertContext from '../../context/alert/alertContext'
+
 
 // passed in as props from app and destructuring
- const Search = ({showClear,clearUsers, setAlert}) => {
+ const Search = () => {
 
 	const githubContext = useContext(GithubContext)
+	const alertContext = useContext(AlertContext)
 
 
 	// destructuring to store initial state, then updating it
-	const [text, setText] = useState('');
+	const [text, setText] = useState("");
 
 	const onChange = (e) => {
 		// this.setState({text:e.target.value})
@@ -22,7 +24,8 @@ import GithubContext from '../../context/github/githubContext'
 	const onSubmit = (e) => {
 		e.preventDefault();
 		if(text === '') {
-			setAlert('Please enter something', 'light')
+			// alert('test')
+			alertContext.setAlert('Please enter something', 'light')
 		} else {
 			// console.log(this.state.text)
 			// passing this function as a prop
@@ -47,18 +50,11 @@ import GithubContext from '../../context/github/githubContext'
 
 					/>
 				</form>
-				{showClear ? <button className="btn btn-light btn-block" onClick={clearUsers}>Clear</button> : ''}
+				{githubContext.users.length > 0 ? <button className="btn btn-light btn-block" onClick={githubContext.clearUsers}>Clear</button> : ''}
 			</div>
 		)
 
 }
 
-Search.propTypes = {
-	
-		clearUsers: PropTypes.func.isRequired,
-		showClear: PropTypes.bool.isRequired,
-		setAlert: PropTypes.func.isRequired,
-	
-}
 
 export default Search

@@ -1,43 +1,47 @@
-import React, {useEffect, Fragment } from 'react'
+import React, {useEffect, Fragment, useContext } from 'react'
 import Spinner from '../layout/Spinner'
-import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
 import Repos from '../repos/Repos'
+import GithubContext from '../../context/github/githubContext'
 
-const User = ({user, loading, getUserRepos, getUser, repos, match}) => {
+
+const User = ({match}) => {
     // document.title = "Loading..."
 
+	const githubContext = useContext(GithubContext)
 
-    useEffect(() => {
-        // grabs the param passed in app.js on the route path='/user/:login'
-        // and plugs it into the api endpoint in the getUser function
-        getUser(match.params.login)
-        document.title = `${name} | Profile`
+	const {getUser, loading, user, repos, getUserRepos } = githubContext
 
-        getUserRepos(match.params.login)
-        // use this to remove warning if you only want it to run once
-        // eslint-disable-next-line
-    },[])
+	useEffect(() => {
+			// grabs the param passed in app.js on the route path='/user/:login'
+			// and plugs it into the api endpoint in the getUser function
+			getUser(match.params.login)
+			document.title = `${name} | Profile`
 
+			getUserRepos(match.params.login)
+			// use this to remove warning if you only want it to run once
+			// eslint-disable-next-line
+	},[])
+
+	const {
+			name,
+			avatar_url,
+			location,
+			bio,
+			blog,
+			login,
+			html_url,
+			company,
+			followers,
+			following,
+			public_repos,
+			public_gists,
+			hireable
+	} = user
 
 
   
 
-        const {
-            name,
-            avatar_url,
-            location,
-            bio,
-            blog,
-            login,
-            html_url,
-            company,
-            followers,
-            following,
-            public_repos,
-            public_gists,
-            hireable
-        } = user
 
         
 
@@ -106,13 +110,6 @@ const User = ({user, loading, getUserRepos, getUser, repos, match}) => {
     
 }
 
-User.propTypes = {
-    loading: PropTypes.bool,
-    repos: PropTypes.array.isRequired,
-    user: PropTypes.object.isRequired,
-    getUser: PropTypes.func.isRequired,
-    getUserRepos: PropTypes.func.isRequired,
-}
 
 
 export default User
