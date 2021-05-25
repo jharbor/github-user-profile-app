@@ -1,8 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import PropTypes from 'prop-types'
+import GithubContext from '../../context/github/githubContext'
 
 // passed in as props from app and destructuring
- const Search = ({searchUsers, showClear,clearUsers, setAlert}) => {
+ const Search = ({showClear,clearUsers, setAlert}) => {
+
+	const githubContext = useContext(GithubContext)
+
 
 	// destructuring to store initial state, then updating it
 	const [text, setText] = useState('');
@@ -22,7 +26,7 @@ import PropTypes from 'prop-types'
 		} else {
 			// console.log(this.state.text)
 			// passing this function as a prop
-			searchUsers(text)
+			githubContext.searchUsers(text)
 			setText('');
 		}
 	}
@@ -51,7 +55,6 @@ import PropTypes from 'prop-types'
 
 Search.propTypes = {
 	
-		searchUsers: PropTypes.func.isRequired,
 		clearUsers: PropTypes.func.isRequired,
 		showClear: PropTypes.bool.isRequired,
 		setAlert: PropTypes.func.isRequired,

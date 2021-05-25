@@ -8,6 +8,7 @@ import Alert from './components/layout/Alert'
 import About from './components/pages/About'
 import axios from 'axios'
 import './App.css';
+import GithubState from './context/github/GithubState';
 
 const App = () => {
 
@@ -30,22 +31,6 @@ const App = () => {
 	}, []);
 
 
-	// coming from Search.js
-	const searchUsers = async (text) => {
-		// console.log(text)
-		// this.setState({loading: true})
-
-		setLoading(true)
-
-		const res = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
-
-		console.log(res.data)
-
-		// set users to res.data.items
-		setUsers(res.data.items)
-
-		setLoading(false)
-	}
 
 	// Get single github user
 	const getUser = async (username) => {
@@ -90,6 +75,7 @@ const App = () => {
 		// const {users, user, loading,repos } = this.state;
 
 		return (
+			<GithubState>
 			<Router>
 			<div className='App'>
 				<Navbar /*title="Override"*/ />
@@ -101,11 +87,11 @@ const App = () => {
 							{document.title = 'Github User Search'}
 							<Search 
 							clearUsers={clearUsers} 
-							searchUsers={searchUsers} 
+							
 							showClear={users.length > 0 ? true : false} 
 							setAlert={showAlert}
 							/>
-							<Users loading={loading} users={users} />	
+							<Users />	
 							</Fragment>
 						)}/>
 						<Route exact path ='/about' component={About}/>
@@ -116,6 +102,7 @@ const App = () => {
 				</div>
 			</div>
 			</Router>
+			</GithubState>
 		);
 	
 }

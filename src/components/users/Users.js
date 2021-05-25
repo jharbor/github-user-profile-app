@@ -1,18 +1,24 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import UserItem from './UserItem'
 import Spinner from '../layout/Spinner'
 import PropTypes from 'prop-types'
+import GithubContext from '../../context/github/githubContext'
 
 // passed in as props from app and destructuring
-const Users = ({users,loading}) => {
+const Users = ({}) => {
+	const githubContext = useContext(GithubContext)
 
+	
+
+	// destructuring allows us to use structure as is
+	const {loading, users} = githubContext
 
 		if(loading){
 			return <Spinner />
 		} else {
 			return (
 				<div style={userStyle}>
-					{users.map(user => (
+					{githubContext.users.map(user => (
 						<UserItem key={user.id} user={user} />
 					))}
 				</div>
